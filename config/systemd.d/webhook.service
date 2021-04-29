@@ -1,0 +1,16 @@
+[Unit]
+Description=Pipitor CI Webhook
+Wants=network-online.target
+After=network-online.target systemd.service
+Wants=webhook.socket
+
+[Service]
+ExecStart=/usr/local/bin/webhook-server
+User=pipitor
+WorkingDirectory=/home/pipitor/webhook
+Environment="RUST_LOG=webhook_server=info"
+Restart=always
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

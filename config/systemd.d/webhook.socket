@@ -1,0 +1,10 @@
+[Unit]
+Description=Webhook socket
+
+[Socket]
+ListenStream=/run/webhook.sock
+SocketUser=nginx
+SocketGroup=nginx
+
+[Install]
+WantedBy=sockets.target

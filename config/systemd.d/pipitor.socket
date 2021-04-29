@@ -1,0 +1,10 @@
+[Unit]
+Description=WebSub subscriber socket for Pipitor the Twitter bot
+
+[Socket]
+ListenStream=/run/pipitor.sock
+SocketUser=nginx
+SocketGroup=nginx
+
+[Install]
+WantedBy=sockets.target

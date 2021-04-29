@@ -1,0 +1,18 @@
+[Unit]
+Description=Pipitor the Twitter bot
+Wants=network-online.target
+After=network-online.target systemd.service
+Wants=pipitor.socket
+OnFailure=alert-email@%n.service
+
+[Service]
+ExecStart=/usr/local/bin/pipitor run
+User=pipitor
+WorkingDirectory=/home/pipitor/pipitor
+Environment="RUST_LOG=pipitor=info"
+Nice=-20
+Restart=always
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

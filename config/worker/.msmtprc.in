@@ -1,0 +1,12 @@
+defaults
+auth	on
+tls	on
+tls_trust_file	/etc/ssl/certs/ca-bundle.crt
+logfile	~/.msmtp.log
+
+account	default
+host	smtp.gmail.com
+port	587
+from	ursus.cauda.elongata@gmail.com
+user	ursus.cauda.elongata
+password	PASSWORD

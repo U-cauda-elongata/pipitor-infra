@@ -1,0 +1,4 @@
+[[hook]]
+location = "/webhook/github/KF_pipitor-resources/check-run"
+program = "./pipitor-ci.sh"
+secret = "CI_SECRET"
