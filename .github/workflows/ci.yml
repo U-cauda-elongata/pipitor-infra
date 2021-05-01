@@ -1,0 +1,22 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: lumaxis/shellcheck-problem-matchers@v1
+        with:
+          format: gcc
+      - name: ShellCheck
+        run: find . -name '*.sh' -exec shellcheck --format gcc {} +
+      - run: echo '::remove-matcher owner=shellcheck-gcc::'
+      - name: Check that `up.sh` works
+        run: |
+          mkdir -m 700 ~/.ssh
+          ln -f .github/workflows/authorized_keys ~/.ssh/authorized_keys
+          mv credential{.example,}
+          ./up.sh
