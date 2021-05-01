@@ -29,7 +29,7 @@ install_packages() {
 		{
 			packages='ca-certificates git gnupg2 jq msmtp nginx systemd'
 			packages="${packages} tmux" # Optional
-			ephemeral='coreutils m4'
+			ephemeral='coreutils m4' # Packages that are only required by this script.
 
 			for pkg in "${@}"; do
 				packages="${packages} ${pkg}"
@@ -146,9 +146,12 @@ main() (
 
 	worker_home="$(eval echo "~${WORKER}")"
 
+	# Merge `config` and `credential` directories into `staging`.
+
 	mkdir -p staging
 
-	find config credential -name '*.in' \
+	# `*.in` files are processed by `m4` before copying.
+	find config credential ! -type d -name '*.in' \
 	| sed -E 's!^(config|credential)/!!' \
 	| sort \
 	| uniq \
@@ -158,6 +161,7 @@ main() (
 		| m4 > "staging/${f%.in}"
 	done
 
+	# Other files are copied as-is.
 	find config ! -type d ! -name '*.in' | while read -r f; do
 		mkdir -p "$(dirname "staging/${f#config/}")"
 		ln -f "$(pwd)/${f}" "staging/${f#config/}"
@@ -170,6 +174,8 @@ main() (
 	chown -R "${WORKER}:${WORKER}" staging/worker
 	chmod -R u=rwX,g=rX,o= staging/worker
 
+	# Set up `~${WORKER}`.
+
 	if [ ! -f "${worker_home}/.ssh/authorized_keys" ]; then
 		install -c -o "${WORKER}" -g "${WORKER}" -m 700 \
 			-d "${worker_home}/.ssh"
@@ -178,6 +184,7 @@ main() (
 			"${worker_home}/.ssh/"
 	fi
 
+	# Clone `KF_pipitor-resources.git`.
 	cd "${worker_home}"
 	if [ ! -e pipitor ]; then
 		set +o errexit
@@ -194,12 +201,15 @@ main() (
 	fi
 	cd "${OLDPWD}"
 
+	# Mirror `staging/worker` into `~${WORKER}`.
 	for f in staging/worker/*; do
 		if [ ! -e "${worker_home}/${f#staging/worker/}" ] || [ -L "${worker_home}/${f#staging/worker/}" ]
 		then
 			ln -fs "$(pwd)/${f}" "${worker_home}/${f#staging/worker/}"
 		fi
 	done
+
+	# Install binary distributions.
 
 	tmp="$(mktemp -d)"
 	GNUPGHOME="$(mktemp -d)"
@@ -224,6 +234,8 @@ main() (
 
 	cd "${OLDPWD}"
 	rm -rf "${tmp}" "${GNUPGHOME}"
+
+	# Set up systemd units.
 
 	for f in staging/systemd.d/*@.service; do
 		if [ ! -e "/etc/systemd/system/${f#staging/systemd.d/}" ] || [ -L "${f}" ]; then
