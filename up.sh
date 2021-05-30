@@ -235,6 +235,13 @@ main() (
 	cd "${OLDPWD}"
 	rm -rf "${tmp}" "${GNUPGHOME}"
 
+	find "staging/etc" ! -type d | while read -r f; do
+		if [ ! -e "/${f#staging/}" ] || [ -L "/${f#staging/}" ]; then
+			mkdir -p "$(dirname "/${f#staging/}")"
+			ln -fs "$(pwd)/${f}" "/${f#staging/}"
+		fi
+	done
+
 	# Set up systemd units.
 
 	for f in staging/systemd.d/*@.service; do
