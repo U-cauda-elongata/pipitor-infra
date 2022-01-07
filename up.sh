@@ -11,8 +11,8 @@ OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ABI=gnu
 TRIPLE="${ARCH}${VENDOR:+-${VENDOR}}-${OS}${ABI:+-${ABI}}"
 
-DHALL=1.38.1
-DHALL_JSON=1.7.6
+DHALL=1.40.2
+DHALL_JSON=1.7.9
 PIPITOR=0.3.0-alpha.9
 PIPITOR_KEY=C90F234F43B5075A0D96C6D5986E104E7F079F61
 WEBHOOK_SERVER=0.1.0
@@ -100,7 +100,7 @@ main() (
 
 	set --
 	dhall_json="https://github.com/dhall-lang/dhall-haskell/releases/download/${DHALL}/dhall-json-${DHALL_JSON}-x86_64-linux.tar.bz2"
-	dhall_json_sha256=640b16a94972b39a5f458d0df3d89af6e695d1d97f25f993d8ed31822e4c0b32
+	dhall_json_sha256=90b2a0da0e30c0637254382c5697a1df75d26d0d6aae1239320f1df74950fe23
 	case "${ARCH}-${OS}" in
 	# aarch64-linux)
 	# 	dhall_json="https://github.com/U-cauda-elongata/dhall-haskell-build/releases/download/${DHALL}/dhall-json-v${DHALL_JSON}-aarch64-linux-gnu.tar.bz2"
