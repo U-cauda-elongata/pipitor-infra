@@ -216,7 +216,7 @@ main() (
 	export GNUPGHOME
 	cd "${tmp}"
 
-	gpg2 --batch --keyserver hkp://pool.sks-keyservers.net --recv-keys "${PIPITOR_KEY}"
+	gpg2 --batch --keyserver hkps://keys.openpgp.org --recv-keys "${PIPITOR_KEY}"
 
 	curl -fsSL -o dhall-json.tar.bz2 "${dhall_json}"
 	echo "${dhall_json_sha256} dhall-json.tar.bz2" | sha256sum --strict --check
