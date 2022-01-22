@@ -202,7 +202,7 @@ main() (
 	cd "${OLDPWD}"
 
 	# Mirror `staging/worker` into `~${WORKER}`.
-	for f in staging/worker/*; do
+	for f in staging/worker/* staging/worker/.*; do
 		if [ ! -e "${worker_home}/${f#staging/worker/}" ] || [ -L "${worker_home}/${f#staging/worker/}" ]
 		then
 			ln -fs "$(pwd)/${f}" "${worker_home}/${f#staging/worker/}"

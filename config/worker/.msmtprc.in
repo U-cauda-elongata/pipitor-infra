@@ -7,6 +7,6 @@ logfile	~/.msmtp.log
 account	default
 host	smtp.gmail.com
 port	587
-from	ursus.cauda.elongata@gmail.com
-user	ursus.cauda.elongata
+from	FROM
+user	USER
 password	PASSWORD
