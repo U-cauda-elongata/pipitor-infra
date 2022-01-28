@@ -1,0 +1,13 @@
+[Unit]
+After=pipitor.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/pipitor-env/scripts/renew_subs.sh
+User=pipitor
+WorkingDirectory=/home/pipitor/pipitor
+Environment="RUST_LOG=pipitor=info"
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
