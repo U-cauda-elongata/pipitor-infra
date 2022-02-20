@@ -1,18 +1,17 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
 PATH="/usr/local/bin:${PATH}"
 
-if jq --exit-status '
-	.["check_run"]
-	| [.["name"] == "Check Dhall file", .["conclusion"] == "success"]
-	| all
-' > /dev/null
-then
+IFS=$'\t' read -r repo run_id run_name conclusion \
+< <(jq -r '[.repository.full_name, .check_run.id, .check_run.name, .check_run.conclusion] | @tsv')
+
+# shellcheck disable=SC2016
+if [ "${run_name}" = 'Generate `Pipitor.json`' ] && [ "${conclusion}" = 'success' ]; then
 	cd "${HOME}/KF_pipitor-resources"
-	git fetch
-	git rebase origin/master
-	dhall-to-json --compact --file Pipitor.dhall --output Pipitor.json
+	curl -fLSs "https://api.github.com/repos/${repo}/actions/runs/${run_id}/artifacts" \
+	| jq -r '.artifacts | map(select(.name == "Pipitor.json")) | .[0].url' \
+	| xargs curl -fLSs -o Pipitor.json
 	pipitor twitter-list-sync & pipitor ctl reload
 fi
