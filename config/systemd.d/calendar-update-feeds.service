@@ -1,0 +1,13 @@
+[Unit]
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/pipitor-env/scripts/calendar_update_feeds.sh /home/pipitor/yt_api_key.txt
+User=pipitor
+WorkingDirectory=/home/pipitor/calendar
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
