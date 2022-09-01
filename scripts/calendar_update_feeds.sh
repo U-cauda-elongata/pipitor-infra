@@ -15,6 +15,9 @@ channels=(
 	UCxm7yNjJsSvyvcG96-Cvmpw
 	UCNObi6xvj6QeZ0g7BhAbF7w
 	UCYa58DdXGAGMJQHqTxi-isA
+	UCnyE-wD1pE2GZOxA6OHjW9g
+	UCtJSUW-5FnwfaivXpluABWA
+	UCKob71cjOlyYF5bgvtGuNKQ
 )
 
 git fetch origin main
