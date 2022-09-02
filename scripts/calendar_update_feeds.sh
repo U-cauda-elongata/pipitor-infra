@@ -20,8 +20,8 @@ channels=(
 	UCKob71cjOlyYF5bgvtGuNKQ
 )
 
-git fetch origin main
-git checkout origin/main
+git fetch origin gh-pages
+git checkout origin/gh-pages
 
 ./scripts/sync_yt.rb "${channels[@]}" < "$1"
 ./scripts/paginate.rb "${channels[@]}"
@@ -30,5 +30,5 @@ git add feed/{*,\*}.json data/{*,\*}.{json,xml}
 
 if ! git diff HEAD --quiet; then
 	git commit --author="$commit_author" -S"$signing_key" -m 'chore: update feeds'
-	git push origin +HEAD:refs/heads/main
+	git push origin +HEAD:refs/heads/gh-pages
 fi
