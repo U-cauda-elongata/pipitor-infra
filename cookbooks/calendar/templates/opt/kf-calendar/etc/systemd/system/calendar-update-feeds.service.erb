@@ -4,8 +4,8 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/opt/kf-calendar/bin/calendar-update-feeds <%= node['user']['pipitor']['directory'] %>/yt_api_key.txt
-User=pipitor
+ExecStart=/opt/kf-calendar/bin/calendar-update-feeds <%= node['user']['kf_calendar']['directory'] %>/yt_api_key.txt
+User=kf_calendar
 WorkingDirectory=/opt/kf-calendar/share/calendar
 NoNewPrivileges=true
 
