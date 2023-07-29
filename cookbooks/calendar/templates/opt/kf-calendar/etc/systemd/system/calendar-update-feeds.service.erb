@@ -1,0 +1,13 @@
+[Unit]
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/kf-calendar/bin/calendar-update-feeds <%= node['user']['pipitor']['directory'] %>/yt_api_key.txt
+User=pipitor
+WorkingDirectory=/opt/kf-calendar/share/calendar
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

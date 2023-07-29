@@ -1,0 +1,13 @@
+[Unit]
+After=pipitor.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/pipitor-infra/bin/pipitor-renew-subs
+User=pipitor
+WorkingDirectory=/opt/pipitor-infra/share/pipitor
+Environment="RUST_LOG=pipitor=info"
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
