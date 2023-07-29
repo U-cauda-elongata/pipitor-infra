@@ -1,3 +1,11 @@
+node.validate! do
+  {
+    calendar: {
+      yt_api_key: string,
+    },
+  }
+end
+
 package 'ruby'
 
 user 'kf_calendar'
@@ -10,6 +18,12 @@ end
 git '/opt/kf-calendar/share/calendar' do
   repository 'https://github.com/U-cauda-elongata/calendar.git'
   user 'kf_calendar'
+end
+file '/opt/kf-calendar/share/calendar/yt_api_key.txt' do
+  owner 'kf_calendar'
+  group 'kf_calendar'
+  mode '600'
+  content node['calendar']['yt_api_key']
 end
 
 directory '/opt/kf-calendar/bin'
