@@ -1,13 +1,15 @@
 package 'ruby'
 
+user 'kf_calendar'
+
 directory '/opt/kf-calendar/share'
 directory '/opt/kf-calendar/share/calendar' do
-  owner 'pipitor'
-  group 'pipitor'
+  owner 'kf_calendar'
+  group 'kf_calendar'
 end
 git '/opt/kf-calendar/share/calendar' do
   repository 'https://github.com/U-cauda-elongata/calendar.git'
-  user 'pipitor'
+  user 'kf_calendar'
 end
 
 directory '/opt/kf-calendar/bin'

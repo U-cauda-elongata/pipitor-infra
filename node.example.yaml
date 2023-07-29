@@ -1,8 +1,9 @@
-alert_email:
-  recipient: recipient@gmail.com
+mail:
   from: sender@gmail.com
   user: sender
   password: 'e-mail password'
+alert_email:
+  recipient: recipient@gmail.com
 pipitor:
   twitter:
     key: 'API key'
