@@ -12,3 +12,5 @@ pipitor:
     host: http://subscriber.example.com
 webhook:
   secret: CI_SECRET
+calendar:
+  yt_api_key: 'YouTube API key'
