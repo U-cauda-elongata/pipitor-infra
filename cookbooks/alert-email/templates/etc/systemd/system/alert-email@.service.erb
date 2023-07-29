@@ -1,0 +1,7 @@
+[Unit]
+Description=Sends failure notification email for %I
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '{ echo "Subject: [systemd] %i"; echo; systemctl status --full "%i"; } | msmtp <%= node['alert_email']['recipient'] %>'
+User=pipitor

@@ -1,1 +1,0 @@
-define(`FROM', `sender@mail.example.com')define(`USER', `sender')define(`PASSWORD', `<e-mail password>')

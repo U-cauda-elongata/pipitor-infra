@@ -1,0 +1,4 @@
+[[hook]]
+location = "/webhook/github/KF_pipitor-resources/check-run"
+program = "/opt/pipitor-infra/bin/pipitor-ci-webhook"
+secret = "<%= node['webhook']['secret'] %>"

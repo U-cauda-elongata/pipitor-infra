@@ -8,15 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3'
+          bundler-cache: true
       - uses: lumaxis/shellcheck-problem-matchers@v1
         with:
           format: gcc
       - name: ShellCheck
-        run: find . -name '*.sh' -exec shellcheck --format gcc {} +
+        run: find . -type f -path './cookbooks/*/bin/*' -exec shellcheck --format gcc {} +
       - run: echo '::remove-matcher owner=shellcheck-gcc::'
-      - name: Check that `up.sh` works
-        run: |
-          mkdir -m 700 ~/.ssh
-          ln -f .github/workflows/authorized_keys ~/.ssh/authorized_keys
-          mv credential{.example,}
-          ./up.sh
+      - run: sudo env PATH="$PATH" bundle exec itamae local recipe.rb --node-yaml node.example.yaml

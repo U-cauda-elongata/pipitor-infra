@@ -1,0 +1,13 @@
+alert_email:
+  recipient: recipient@gmail.com
+  from: sender@gmail.com
+  user: sender
+  password: 'e-mail password'
+pipitor:
+  twitter:
+    key: 'API key'
+    secret: 'API secret'
+  websub:
+    host: http://subscriber.example.com
+webhook:
+  secret: CI_SECRET
