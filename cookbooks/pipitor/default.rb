@@ -17,6 +17,8 @@ end
 package 'ca-certificates'
 package 'sqlite3'
 
+user 'pipitor'
+
 extract_http_archive '/usr/local/bin/pipitor' do
   version = '0.3.0-alpha.9.4'
   url "https://github.com/tesaguri/pipitor/releases/download/v#{version}/pipitor-v#{version}-#{node['triple']}.tar.gz"
