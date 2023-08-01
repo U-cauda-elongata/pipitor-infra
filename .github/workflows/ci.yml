@@ -19,3 +19,4 @@ jobs:
         run: find . -type f -path './cookbooks/*/bin/*' -exec shellcheck --format gcc {} +
       - run: echo '::remove-matcher owner=shellcheck-gcc::'
       - run: sudo env PATH="$PATH" bundle exec itamae local recipe.rb --node-yaml node.example.yaml
+      - run: bundle exec rake spec
