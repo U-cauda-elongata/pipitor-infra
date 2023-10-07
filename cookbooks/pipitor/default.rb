@@ -53,6 +53,13 @@ service 'pipitor' do
   action :start
 end
 
+service_file '/opt/pipitor-infra/etc/systemd/system/pipitor-websub-proxy.socket'
+service_file '/opt/pipitor-infra/etc/systemd/system/pipitor-websub-proxy.service'
+
+service 'pipitor-websub-proxy' do
+  action :start
+end
+
 directory '/opt/pipitor-infra/bin'
 remote_file '/opt/pipitor-infra/bin/pipitor-renew-subs' do
   mode '755'

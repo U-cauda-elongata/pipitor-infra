@@ -1,0 +1,10 @@
+[Unit]
+Description=HTTP server socket for `pipitor-websub-proxy.service`
+
+[Socket]
+ListenStream=/run/pipitor-websub-proxy.sock
+SocketUser=nginx
+SocketGroup=nginx
+
+[Install]
+WantedBy=sockets.target

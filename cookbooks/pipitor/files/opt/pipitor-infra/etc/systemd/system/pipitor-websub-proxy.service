@@ -1,0 +1,14 @@
+[Unit]
+Description=WebSub filter proxy for `pipitor.service`
+Wants=pipitor.socket pipitor-websub-proxy.socket
+OnFailure=alert-email@%n.service
+
+[Service]
+ExecStart=/opt/pipitor-infra/bin/pipitor-websub-proxy
+User=pipitor
+Environment="RUST_LOG=pipitor_websub_proxy=info"
+Restart=always
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
