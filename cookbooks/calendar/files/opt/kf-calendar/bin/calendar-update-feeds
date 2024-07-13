@@ -30,7 +30,7 @@ mkdir -p docs/feed
 
 git -c gc.auto=0 add docs/feed/{*,\*}.json data/{*,\*}.{json,xml}
 
-if ! git diff HEAD --quiet; then
+if ! git diff --quiet HEAD docs/feed\*.json data/\*.json; then
 	git -c gc.auto=0 commit --author="$commit_author" -S"$signing_key" -m 'chore: update feeds'
 	git -c gc.auto=0 push origin +HEAD:refs/heads/gh-pages
 fi
