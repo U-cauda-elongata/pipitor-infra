@@ -23,10 +23,12 @@ channels=(
 git -c gc.auto=0 fetch origin gh-pages
 git -c gc.auto=0 checkout origin/gh-pages
 
+mkdir -p docs/feed
+
 ./scripts/sync_yt.rb "${channels[@]}" < "$1"
 ./scripts/paginate.rb "${channels[@]}"
 
-git -c gc.auto=0 add feed/{*,\*}.json data/{*,\*}.{json,xml}
+git -c gc.auto=0 add docs/feed/{*,\*}.json data/{*,\*}.{json,xml}
 
 if ! git diff HEAD --quiet; then
 	git -c gc.auto=0 commit --author="$commit_author" -S"$signing_key" -m 'chore: update feeds'
