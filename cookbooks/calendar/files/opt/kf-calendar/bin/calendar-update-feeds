@@ -25,8 +25,8 @@ git -c gc.auto=0 checkout origin/gh-pages
 
 mkdir -p docs/feed
 
-./scripts/sync_yt.rb "${channels[@]}" < "$1"
-./scripts/paginate.rb "${channels[@]}"
+bundle exec scripts/sync_yt.rb "${channels[@]}" < "$1"
+bundle exec scripts/paginate.rb "${channels[@]}"
 
 git -c gc.auto=0 add docs/feed/{*,\*}.json data/{*,\*}.{json,xml}
 
