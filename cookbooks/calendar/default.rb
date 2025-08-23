@@ -27,7 +27,7 @@ file '/opt/kf-calendar/share/calendar/yt_api_key.txt' do
 end
 
 directory '/opt/kf-calendar/bin'
-remote_file '/opt/kf-calendar/bin/calendar-update-feeds' do
+remote_executable '/opt/kf-calendar/bin/calendar-update-feeds' do
   mode '755'
 end
 

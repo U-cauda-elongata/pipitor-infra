@@ -19,6 +19,11 @@ module Itamae
 
         def action_create(options)
           super
+
+          if check_command('command -v restorecon')
+            run_command("restorecon #{shell_escape(attributes.path)}")
+          end
+
           unless current.enabled
             name = attributes.path.split(File::SEPARATOR).last
             if run_specinfra(:check_service_is_enabled, name)

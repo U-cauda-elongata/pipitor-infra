@@ -1,4 +1,5 @@
 require_relative 'resources/extract_http_archive'
+require_relative 'resources/remote_executable'
 require_relative 'resources/service_file'
 require_relative 'resources/service_template'
 

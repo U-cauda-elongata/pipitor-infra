@@ -21,7 +21,7 @@ extract_http_archive '/usr/local/bin/webhook-server' do
 end
 
 directory '/opt/pipitor-infra/bin'
-remote_file '/opt/pipitor-infra/bin/pipitor-ci-webhook' do
+remote_executable '/opt/pipitor-infra/bin/pipitor-ci-webhook' do
   mode '755'
 end
 
