@@ -9,6 +9,25 @@ end
 package 'ruby'
 
 user 'kf_calendar'
+directory '/home/kf_calendar/.ssh' do
+  owner 'kf_calendar'
+  group 'kf_calendar'
+  mode '700'
+end
+
+# <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints>
+GITHUB_SSH_KNOWN_HOSTS_ENTRY = 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl'
+file '/etc/ssh/ssh_known_hosts'
+file '/etc/ssh/ssh_known_hosts' do
+  action :edit
+  block do |content|
+    unless content.each_line.any? {|l| l.chomp == GITHUB_SSH_KNOWN_HOSTS_ENTRY }
+      content.concat("\n") unless content.empty? || content.end_with?("\n")
+      content.concat(GITHUB_SSH_KNOWN_HOSTS_ENTRY)
+      content.concat("\n")
+    end
+  end
+end
 
 directory '/opt/kf-calendar/share'
 directory '/opt/kf-calendar/share/calendar' do
