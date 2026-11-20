@@ -19,6 +19,10 @@ channels=(
 	UCnyE-wD1pE2GZOxA6OHjW9g
 	UCtJSUW-5FnwfaivXpluABWA
 	UCKob71cjOlyYF5bgvtGuNKQ
+	UCcqA3M93w2Xyy0wlsjPs_CQ
+	UCD-xnMdwk1KguIEu9B22JXQ
+	UCnOSIKJA8Ql8OqS8sTx5O-g
+	UC6ddYbKrxpcOpXuZ2F5yu_w
 )
 
 git -c gc.auto=0 fetch origin gh-pages
